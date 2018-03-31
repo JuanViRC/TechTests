@@ -21,42 +21,12 @@ namespace TechTest
 
         public void TurnLeft()
         {
-            if (Direction == Direction.North)
-            {
-                Direction = Direction.West;
-            }
-            else if (Direction == Direction.West)
-            {
-                Direction = Direction.South;
-            }
-            else if (Direction == Direction.South)
-            {
-                Direction = Direction.East;
-            }
-            else if (Direction == Direction.East)
-            {
-                Direction = Direction.North;
-            }
+            Direction = (Direction == Direction.North) ? Direction.West : Direction - 1;            
         }
 
         public void TurnRight()
         {
-            if (Direction == Direction.North)
-            {
-                Direction = Direction.East;
-            }
-            else if (Direction == Direction.West)
-            {
-                Direction = Direction.North;
-            }
-            else if (Direction == Direction.South)
-            {
-                Direction = Direction.West;
-            }
-            else if (Direction == Direction.East)
-            {
-                Direction = Direction.South;
-            }
+            Direction = (Direction == Direction.West) ? Direction.North : Direction + 1;
         }
 
         public void MoveForward()
@@ -78,7 +48,7 @@ namespace TechTest
             }
             else if (Direction == Direction.East)
             {
-                if (Position.X == Grid.LengthY) return;
+                if (Position.Y == Grid.LengthY) return;
                 Position = new Position(Position.X, Position.Y + 1);
             }
         }

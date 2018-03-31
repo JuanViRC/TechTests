@@ -173,5 +173,40 @@ namespace TechTestTests
             Assert.AreEqual(0, rover.Position.Y);
         }
 
+        [TestMethod]
+        public void GivenRoverIsFacingNorthAndPosition_0_0_WhenUserMovesForward_ThenRoversPositionDoesNotChange()
+        {
+            roverInitialPosition = new Position(0, 0);
+            var rover = new Rover(roverInitialPosition, Direction.North, grid);
+
+            rover.MoveForward();
+
+            Assert.AreEqual(0, rover.Position.X);
+            Assert.AreEqual(0, rover.Position.Y);
+        }
+
+        [TestMethod]
+        public void GivenRoverIsFacingEastAndPosition_0_5_WhenUserMovesForward_ThenRoversPositionDoesNotChange()
+        {
+            roverInitialPosition = new Position(0, 5);
+            var rover = new Rover(roverInitialPosition, Direction.East, grid);
+
+            rover.MoveForward();
+
+            Assert.AreEqual(0, rover.Position.X);
+            Assert.AreEqual(5, rover.Position.Y);
+        }
+
+        [TestMethod]
+        public void GivenRoverIsFacingSouthAndPosition_5_0_WhenUserMovesForward_ThenRoversPositionDoesNotChange()
+        {
+            roverInitialPosition = new Position(5, 0);
+            var rover = new Rover(roverInitialPosition, Direction.South, grid);
+
+            rover.MoveForward();
+
+            Assert.AreEqual(5, rover.Position.X);
+            Assert.AreEqual(0, rover.Position.Y);
+        }
     }
 }

@@ -4,14 +4,32 @@ namespace TechTest
 {
     public class RoverManager
     {
-        public enum RoverFacing
+
+        public static void Main()
         {
-            North,
-            East,
-            South,
-            West
+            var position = new Position(0, 0);
+            var grid = new Grid(5, 5);
+            var rover = new Rover(position, Direction.North, grid);
+
+            var roverCommandFactory = new VehicleCommandFactory(rover);
+
+            var driver = new Driver();
+
+            Console.WriteLine(rover.GetDisplayPosition());
+            
+            while (true)
+            {
+                var stringCommand = Console.ReadLine();
+                var command = roverCommandFactory.CreateCommand(stringCommand);
+
+                driver.SetCommand(command);
+                driver.Drive();
+
+                Console.WriteLine(rover.GetDisplayPosition());
+            }
         }
 
+        /*
         public static void Main()
         {
             var roverPositionX = 0;
@@ -57,5 +75,6 @@ namespace TechTest
                 }
             }
         }
+        */
     }
 }
