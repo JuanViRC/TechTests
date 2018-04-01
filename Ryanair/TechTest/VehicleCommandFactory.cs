@@ -11,7 +11,7 @@ namespace TechTest
 
         public VehicleCommandFactory(IVehicle vehicle)
         {
-            this.vehicle = vehicle;
+            this.vehicle = vehicle ?? throw new ArgumentNullException();
         }
 
         public ICommand CreateCommand(string command)

@@ -1,5 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
 using TechTest;
+using TechTest.Commands;
 
 namespace TechTestTests
 {
@@ -161,6 +164,7 @@ namespace TechTestTests
             Assert.AreEqual("(1,1)", currentDisplayedPosition);
         }
 
+
         [TestMethod]
         public void GivenRoverIsFacingWestAndPosition_0_0_WhenUserMovesForward_ThenRoversPositionDoesNotChange()
         {
@@ -207,6 +211,78 @@ namespace TechTestTests
 
             Assert.AreEqual(5, rover.Position.X);
             Assert.AreEqual(0, rover.Position.Y);
+        }
+
+
+
+        [TestMethod]
+        public void GivenVehicleCommandFactory_WhenCorrectStringFormatedCommand_F_ThenReturnsMoveForwardCommand()
+        {
+            var mockVehicle = new Mock<IVehicle>();
+            var commandFactory = new VehicleCommandFactory(mockVehicle.Object);
+
+            var command = commandFactory.CreateCommand("F");
+
+            Assert.IsInstanceOfType(command, typeof(MoveForwardCommand));
+        }
+
+        [TestMethod]
+        public void GivenVehicleCommandFactory_WhenCorrectStringFormatedCommand_L_ThenReturnsTurnLeftCommand()
+        {
+            var vehicle = new MockVehicle();
+            var commandFactory = new VehicleCommandFactory(vehicle);
+
+            var command = commandFactory.CreateCommand("L");
+
+            Assert.IsInstanceOfType(command, typeof(TurnLeftCommand));
+        }
+
+        [TestMethod]
+        public void GivenVehicleCommandFactory_WhenCorrectStringFormatedCommand_R_ThenReturnsTurnRightCommand()
+        {
+            var vehicle = new MockVehicle();
+            var commandFactory = new VehicleCommandFactory(vehicle);
+
+            var command = commandFactory.CreateCommand("R");
+
+            Assert.IsInstanceOfType(command, typeof(TurnRightCommand));
+        }
+
+        [TestMethod]
+        public void GivenVehicleCommandFactory_WhenIncorrectStringFormatedCommand_ThenThrowsArgumentException()
+        {
+            var vehicle = new MockVehicle();
+            var commandFactory = new VehicleCommandFactory(vehicle);
+
+            var action = new Action(() => commandFactory.CreateCommand("x"));
+
+            Assert.ThrowsException<ArgumentException>(action);
+        }
+
+        [TestMethod]
+        public void GivenVehicleCommandFactory_WhenVehicleIsNull_ThenThrowsArgumentNullException()
+        {
+            var vehicle = default(IVehicle);
+
+            var action = new Action(() => new VehicleCommandFactory(vehicle));
+
+            Assert.ThrowsException<ArgumentNullException>(action);
+        }
+
+
+
+
+        [TestMethod]
+        public void GivenMoveForwardCommand_WhenExecuteIsInvoke_ThenVehicleMoveForwardIsInvoke()
+        {
+            var mockVehicle = new Mock<IVehicle>();
+            mockVehicle.Setup(v => v.MoveForward());
+
+            var command = new MoveForwardCommand(mockVehicle.Object);
+
+            command.Execute();
+
+            mockVehicle.Verify(v => v.MoveForward(), Times.Once);
         }
     }
 }
