@@ -6,52 +6,43 @@ using System.Linq;
 namespace Fenergo.TechTest
 {
     public class PartitionSolver
-    {
+    {        
 
-        private readonly IList<int> originalSet;
-        private IList<int> set1;
-        private IList<int> set2;
-
-        private int totalSetSum;
-        private double targetSetSum;
-
-        public PartitionSolver(IList<int> problemSet)
-        {
-            originalSet = problemSet;
-            set1 = new List<int>();
-            set2 = new List<int>();
-        }
-
-        public void SolveProblem()
+        public static void SolveProblem(IList<int> problemSet)
         {            
+            IList<int> originalSet = problemSet;
+            IList<int> set1 = originalSet.ToList();
+            IList<int> set2 = new List<int>();
+
+            int totalSetSum;
+            double targetSetSum;
+
             PrintSet("Original Set", originalSet);
 
             totalSetSum = originalSet.Sum();
             targetSetSum = totalSetSum / 2.0;
 
-            Console.WriteLine($"Target Sum - {targetSetSum}");
+            Print($"Target Sum - {targetSetSum}");
             
             var isSolutionPosible = Math.Abs(targetSetSum % 1) <= (Double.Epsilon * 100);
             if (!isSolutionPosible)
             {
-                Console.WriteLine("IMPOSIBLE");
+                Print("IMPOSIBLE");
                 return;
             }            
-
-            set1 = originalSet.ToList();
-
-            if (IsTargetReach(set1, set2))
+            
+            if (IsTargetReach(set1, set2, targetSetSum))
             {
                 PrintSet("Set 1", set1);
                 PrintSet("Set 2", set2);
             }
             else
             {
-                Console.WriteLine("IMPOSIBLE");
+                Print("IMPOSIBLE");
             }
         }
 
-        private bool IsTargetReach(IList<int> originalSet, IList<int> targetSet)
+        private static bool IsTargetReach(IList<int> originalSet, IList<int> targetSet, double targetSetSum)
         {
             for(var i = 0; i < originalSet.Count; i++)
             {
@@ -63,7 +54,7 @@ namespace Fenergo.TechTest
                     MoveLastElementFromSetToPositionInTargetSet(originalSet, targetSet, i);
                     return false;
                 }
-                if (IsTargetReach(originalSet, targetSet)) return true;
+                if (IsTargetReach(originalSet, targetSet, targetSetSum)) return true;
 
                 MoveLastElementFromSetToPositionInTargetSet(originalSet, targetSet, i);
             }
@@ -83,13 +74,18 @@ namespace Fenergo.TechTest
             originSet.RemoveAt(originalSetPosition);
         }
 
-        private void PrintSet(string setName, IEnumerable<int> set, bool showTotalSum = true)
+        public static void PrintSet(string setName, IEnumerable<int> set, bool showTotalSum = true)
         {
             var strSet = string.Join(", ", set);
 
             var totalSum = showTotalSum ? $" - Total Sum: {set.Sum()}" : string.Empty;
 
-            Console.WriteLine($"{setName} - {{{strSet}}}{totalSum}");
+            Print($"{setName} - {{{strSet}}}{totalSum}");
+        }
+
+        public static void Print(string message)
+        {
+            //Console.WriteLine(message);
         }
 
     }
