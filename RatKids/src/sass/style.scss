@@ -6,7 +6,7 @@ $grid-gutter-width: 40px !default;
 $border-radius-base:  4px !default;
 $padding-base-vertical: 14px !default;
 
-$brand-primary: #17B794 !default;
+$brand-primary: rgb(61, 61, 61) !default;
 $brand-secondary: #118DF0 !default; 
 
 $brand-white: #fff;
@@ -405,7 +405,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	}
 }
 .gtco-cover {
-	height: 900px;
+	height: 600px;
 
 	background-size: cover;
 	background-position: center center;
@@ -426,7 +426,7 @@ h1, h2, h3, h4, h5, h6, figure {
 		top: 0;
 		left: 0;
 		right: 0;
-		background: rgba(29, 43, 83, .89);
+		background: rgba(88, 194, 255, 0.89);
 	}
 	> .gtco-container {
 		position: relative;
@@ -437,7 +437,7 @@ h1, h2, h3, h4, h5, h6, figure {
 	}
 	.display-t,
 	.display-tc {
-		height: 900px;
+		height: 600px;
 		display: table;
 		width: 100%;
 		@media screen and (max-width: $screen-sm) {
@@ -591,6 +591,7 @@ form {
 	.display-tc {
 		display: table-cell!important;
 		vertical-align: middle;
+		text-align: center;
 		h1, h2 {
 			margin: 0;
 			padding: 0;
