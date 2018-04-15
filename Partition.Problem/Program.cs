@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace PartitionProblem
 {
@@ -20,7 +21,8 @@ namespace PartitionProblem
             {
                 WatchTime(() => PrintSet("Solution", problemSets[i]), () =>
                 {
-                    PartitionSolver.SolveProblem(problemSets[i]);
+                    var solution = new PartitionSolver(problemSets[i]);
+                    solution.SolveProblem();
                 });
             }
 

@@ -4,64 +4,106 @@ using System.Linq;
 
 namespace PartitionProblem
 {
-    public static class PartitionSolver
-    {        
+    public class PartitionSolver
+    {
+        private class SolutionSet
+        {
+            public List<int> Set1 { get; set; }
+            public List<int> Set2 { get; set; }            
+        }
 
-        public static void SolveProblem(IList<int> problemSet)
+        private readonly IEnumerable<int> originalSet;
+        private double targetSetSum;
+        private readonly List<SolutionSet> solutions = new List<SolutionSet>();
+
+        public PartitionSolver(IEnumerable<int> problemSet)
+        {
+            originalSet = problemSet;
+        }
+
+        public void SolveProblem()
         {            
-            IList<int> originalSet = problemSet;
-
             var set1 = new List<int>(originalSet);
             var set2 = new List<int>();
 
-            double targetSetSum = originalSet.Sum() / 2.0;
+            targetSetSum = originalSet.Sum() / 2.0;
 
-            Print($"Target Sum - {targetSetSum}");
+            Helper.Print($"Target Sum - {targetSetSum}");
             
             var isSolutionPosible = Math.Abs(targetSetSum % 1) <= (Double.Epsilon * 100);
             if (!isSolutionPosible)
             {
-                Print("IMPOSIBLE");
+                Helper.Print("IMPOSIBLE");
                 return;
-            }            
-            
-            if (IsTargetReach(set1, set2, targetSetSum))
+            }
+
+            CalculateSolutions(set1, set2);
+
+            if (solutions.Any())
             {
-                PrintSet("Set 1", set1);
-                PrintSet("Set 2", set2);
+                var solutionNumber = 1;
+                foreach(var solution in solutions)
+                {
+                    Helper.Print($"Solution {solutionNumber}");
+                    Helper.PrintSet("  - Set 1", solution.Set1);
+                    Helper.PrintSet("  - Set 2", solution.Set2);
+                    solutionNumber++;
+                }                
             }
             else
             {
-                Print("IMPOSIBLE");
+                Helper.Print("IMPOSIBLE");
             }
         }
 
-        private static bool IsTargetReach(IList<int> set1, IList<int> set2, double targetSetSum)
+        private bool CalculateSolutions(IList<int> set1, IList<int> set2)
         {
             for(var i = 0; i < set1.Count; i++)
             {
                 set1.MoveItemToSet(i, set2);
-                
-                if (set2.Sum() == targetSetSum && set1.Sum() == targetSetSum) return true;
+
+                if (set2.Sum() == targetSetSum && set1.Sum() == targetSetSum)
+                {
+                    solutions.Add(new SolutionSet
+                    {
+                        Set1 = new List<int>(set1),
+                        Set2 = new List<int>(set2)
+                    });
+
+                    return true;
+                }
 
                 if (set2.Sum() > targetSetSum)
                 {
-                    set1.MoveLastItemToSet(i, set2);
+                    set2.MoveLastItemToSet(i, set1);
                     return false;
                 }
 
-                if (IsTargetReach(set1, set2, targetSetSum)) return true;
+                if (CalculateSolutions(set1, set2)) continue; // return true;
 
-                set1.MoveLastItemToSet(i, set2);
+                set2.MoveLastItemToSet(i, set1);
             }
 
             return false;
         }
+    }
 
+    /*
+        [1,2,3,4,5,6] [] []
+        [1,2,3,4,5,6] [2,3,4,5,6] [1]
+        [1,2,3,4,5,6] [3,4,5,6] [1,2] OK
+        [1,2,3,4,5,6] [4,5,6] [1,2,3]
+
+
+    */
+
+
+    public static class Helper
+    {        
         public static void MoveLastItemToSet(this IList<int> set, int position, IList<int> targetSet)
         {
-            set.Insert(position, targetSet.Last());
-            targetSet.RemoveAt(targetSet.Count - 1);
+            targetSet.Insert(position, set.Last());
+            set.RemoveAt(set.Count - 1);
         }
 
         public static void MoveItemToSet(this IList<int> set, int position, IList<int> targetSet)
@@ -83,6 +125,5 @@ namespace PartitionProblem
         {
             Console.WriteLine(message);
         }
-
     }
 }
