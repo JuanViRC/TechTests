@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
-namespace Fenergo.TechTest
+namespace PartitionProblem
 {
     public static class PartitionSolver
     {        
@@ -11,16 +10,11 @@ namespace Fenergo.TechTest
         public static void SolveProblem(IList<int> problemSet)
         {            
             IList<int> originalSet = problemSet;
-            IList<int> set1 = originalSet.ToList();
-            IList<int> set2 = new List<int>();
 
-            int totalSetSum;
-            double targetSetSum;
+            var set1 = new List<int>(originalSet);
+            var set2 = new List<int>();
 
-            //PrintSet("Original Set", originalSet);
-
-            totalSetSum = originalSet.Sum();
-            targetSetSum = totalSetSum / 2.0;
+            double targetSetSum = originalSet.Sum() / 2.0;
 
             Print($"Target Sum - {targetSetSum}");
             
@@ -42,21 +36,23 @@ namespace Fenergo.TechTest
             }
         }
 
-        private static bool IsTargetReach(IList<int> originalSet, IList<int> targetSet, double targetSetSum)
+        private static bool IsTargetReach(IList<int> set1, IList<int> set2, double targetSetSum)
         {
-            for(var i = 0; i < originalSet.Count; i++)
+            for(var i = 0; i < set1.Count; i++)
             {
-                originalSet.MoveItemToSet(i, targetSet);
+                set1.MoveItemToSet(i, set2);
                 
-                if (targetSet.Sum() == targetSetSum && originalSet.Sum() == targetSetSum) return true;
-                if (targetSet.Sum() > targetSetSum)
+                if (set2.Sum() == targetSetSum && set1.Sum() == targetSetSum) return true;
+
+                if (set2.Sum() > targetSetSum)
                 {
-                    originalSet.MoveLastItemToSet(i, targetSet);
+                    set1.MoveLastItemToSet(i, set2);
                     return false;
                 }
-                if (IsTargetReach(originalSet, targetSet, targetSetSum)) return true;
 
-                originalSet.MoveLastItemToSet(i, targetSet);
+                if (IsTargetReach(set1, set2, targetSetSum)) return true;
+
+                set1.MoveLastItemToSet(i, set2);
             }
 
             return false;
@@ -80,7 +76,7 @@ namespace Fenergo.TechTest
 
             var totalSum = showTotalSum ? $" - Total Sum: {set.Sum()}" : string.Empty;
 
-            Print($"{setName} - {{{strSet}}}{totalSum}");
+            Print($"{setName} - [{strSet}]{totalSum}");
         }
 
         public static void Print(string message)

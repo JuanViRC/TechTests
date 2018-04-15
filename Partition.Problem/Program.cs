@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
-namespace Fenergo.TechTest
+namespace PartitionProblem
 {
     class Program
     {
@@ -12,7 +11,8 @@ namespace Fenergo.TechTest
             int[][] problemSets = {
                 new int[]{ 10, 20, 90, 100, 200 },
                 new int[]{ 2, 3, 4, 5, 6, 2, 12, 23, 1, 2, 4, 5, 5, 1, 6, 7, 10, 5, 2, 1 },
-                new int[]{ 2, 3, 4, 5, 6, 2 }
+                new int[]{ 2, 3, 4, 5, 6, 2 },
+                new int[]{ 6, 4, 3, 2, 1, 6 }
             };
 
             for (var i = 0; i < problemSets.Length; i++)
@@ -23,8 +23,18 @@ namespace Fenergo.TechTest
                 });
             }
 
-            //WatchTime("Solution B", () => SolutionB.Solve(problemSet));
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"Solution B");
 
+            for (var i = 0; i < problemSets.Length; i++)
+            {
+                WatchTime(() => PrintSet("Solution", problemSets[i]), () =>
+                {
+                    var solutionB = new SolutionB(problemSets[i]);
+                    solutionB.SolveProblem();
+                });
+            }
 
             Console.ReadKey();
         }
@@ -47,7 +57,7 @@ namespace Fenergo.TechTest
         {
             var strSet = string.Join(", ", set);
 
-            Console.WriteLine($"{setName} - {{{strSet}}}");
+            Console.WriteLine($"{setName} - [{strSet}]");
         }
 
     }
