@@ -325,7 +325,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .gtco-cover {
-  height: 900px;
+  height: 500px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -346,7 +346,7 @@ h1, h2, h3, h4, h5, h6, figure {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(29, 43, 83, 0.89);
+  background: rgba(76, 171, 216, 0.6);
 }
 .gtco-cover > .gtco-container {
   position: relative;
@@ -359,7 +359,8 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-cover .display-t,
 .gtco-cover .display-tc {
-  height: 900px;
+  text-align: center;
+  height: 400px;
   display: table;
   width: 100%;
 }
@@ -1476,7 +1477,7 @@ form label {
   width: 33.33%;
   float: left;
   padding: 30px;
-  background: #17B794;
+  background: #2c2c2c;
   position: relative;
   text-align: center;
 }
@@ -1503,7 +1504,7 @@ form label {
   height: 90px;
   margin: 0 auto 10px auto;
   position: relative;
-  background: #15a989;
+  /* background: #15a989; */
   top: -3em;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -1530,7 +1531,7 @@ form label {
   -webkit-box-shadow: 0px 0 30px 10px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0 30px 10px rgba(0, 0, 0, 0.25);
   box-shadow: 0px 0 30px 10px rgba(0, 0, 0, 0.25);
-  background: #15a585;
+  background: #2c2c2c;
 }
 @media screen and (max-width: 768px) {
   #gtco-features-3 .feature.feature-2 {
@@ -1540,7 +1541,7 @@ form label {
   }
 }
 #gtco-features-3 .feature.feature-2 .icon {
-  background: #13977a;
+  /* background: #13977a; */
 }
 #gtco-features-3 .feature.feature-2 .feature-inner {
   top: -3em;
@@ -1555,7 +1556,7 @@ form label {
   position: absolute;
   top: -50px;
   content: "";
-  background: #15a585;
+  background: #2c2c2c;
   height: 50px;
   width: 100%;
   left: 0;
@@ -1569,7 +1570,7 @@ form label {
   position: absolute;
   bottom: -30px;
   content: "";
-  background: #15a585;
+  background: #2c2c2c;
   height: 30px;
   width: 100%;
   left: 0;
@@ -1584,7 +1585,7 @@ form label {
 }
 #gtco-features-3 .feature.feature-3 {
   z-index: 7;
-  background: #129377;
+  background: #2c2c2c;
 }
 #gtco-features-3 .feature.feature-3 .icon {
   background: #118a6f;

@@ -1,0 +1,14 @@
+{
+  "name": "rat-kids",
+  "version": "1.0.0",
+  "description": "marketing",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ./src -o"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
