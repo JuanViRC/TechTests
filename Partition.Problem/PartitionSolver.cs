@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Fenergo.TechTest
 {
-    public class PartitionSolver
+    public static class PartitionSolver
     {        
 
         public static void SolveProblem(IList<int> problemSet)
@@ -17,7 +17,7 @@ namespace Fenergo.TechTest
             int totalSetSum;
             double targetSetSum;
 
-            PrintSet("Original Set", originalSet);
+            //PrintSet("Original Set", originalSet);
 
             totalSetSum = originalSet.Sum();
             targetSetSum = totalSetSum / 2.0;
@@ -46,32 +46,32 @@ namespace Fenergo.TechTest
         {
             for(var i = 0; i < originalSet.Count; i++)
             {
-                MoveElementAtPositionFromSetToTargetSet(originalSet, targetSet, i);
+                originalSet.MoveItemToSet(i, targetSet);
                 
                 if (targetSet.Sum() == targetSetSum && originalSet.Sum() == targetSetSum) return true;
                 if (targetSet.Sum() > targetSetSum)
                 {
-                    MoveLastElementFromSetToPositionInTargetSet(originalSet, targetSet, i);
+                    originalSet.MoveLastItemToSet(i, targetSet);
                     return false;
                 }
                 if (IsTargetReach(originalSet, targetSet, targetSetSum)) return true;
 
-                MoveLastElementFromSetToPositionInTargetSet(originalSet, targetSet, i);
+                originalSet.MoveLastItemToSet(i, targetSet);
             }
 
             return false;
         }
 
-        private static void MoveLastElementFromSetToPositionInTargetSet(IList<int> originalSet, IList<int> targetSet, int originalSetPosition)
+        public static void MoveLastItemToSet(this IList<int> set, int position, IList<int> targetSet)
         {
-            originalSet.Insert(originalSetPosition, targetSet.Last());
+            set.Insert(position, targetSet.Last());
             targetSet.RemoveAt(targetSet.Count - 1);
         }
 
-        private static void MoveElementAtPositionFromSetToTargetSet(IList<int> originSet, IList<int> targetSet, int originalSetPosition)
+        public static void MoveItemToSet(this IList<int> set, int position, IList<int> targetSet)
         {
-            targetSet.Add(originSet[originalSetPosition]);
-            originSet.RemoveAt(originalSetPosition);
+            targetSet.Add(set[position]);
+            set.RemoveAt(position);
         }
 
         public static void PrintSet(string setName, IEnumerable<int> set, bool showTotalSum = true)
@@ -85,7 +85,7 @@ namespace Fenergo.TechTest
 
         public static void Print(string message)
         {
-            //Console.WriteLine(message);
+            Console.WriteLine(message);
         }
 
     }

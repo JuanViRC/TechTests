@@ -15,44 +15,13 @@ namespace Fenergo.TechTest
                 new int[]{ 2, 3, 4, 5, 6, 2 }
             };
 
-
-            for (var i = 0; i < problemSets.Length; i++)
-            {
-                var set = problemSets[i].OrderBy(number => number).ToList();
-
-                WatchTime(() => PrintSet("Solution with sorted set", set), () =>
-                {
-                    for (var j = 0; j < 1000; j++)
-                    {
-                        PartitionSolver.SolveProblem(set);
-                    }
-                });
-            }
-
             for (var i = 0; i < problemSets.Length; i++)
             {
                 WatchTime(() => PrintSet("Solution", problemSets[i]), () =>
                 {
-                    for(var j = 0; j < 1000; j++)
-                    {
-                        PartitionSolver.SolveProblem(problemSets[i]);
-                    }
+                    PartitionSolver.SolveProblem(problemSets[i]);
                 });
             }
-
-            for (var i = 0; i < problemSets.Length; i++)
-            {
-                var set = problemSets[i].OrderBy(number => number).ToList();
-
-                WatchTime(() => PrintSet("Solution with sorted set", set), () =>
-                {
-                    for (var j = 0; j < 1000; j++)
-                    {
-                        PartitionSolver.SolveProblem(set);
-                    }
-                });
-            }
-
 
             //WatchTime("Solution B", () => SolutionB.Solve(problemSet));
 
