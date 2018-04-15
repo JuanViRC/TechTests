@@ -7,13 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Round1A2017", "Round1A2017\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RoverProblem", "RoverProblem", "{19BC8491-0CD8-4E30-A232-D40F95607327}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechTest", "Ryanair\TechTest\TechTest.csproj", "{3E6AF94E-10D1-4FEA-B220-07371BAA487F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechTest", "Rover\TechTest\TechTest.csproj", "{3E6AF94E-10D1-4FEA-B220-07371BAA487F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechTestTests", "Ryanair\TechTestTests\TechTestTests.csproj", "{CFC8B3F1-1A94-4C5E-A87B-7321DE6E2C52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechTestTests", "Rover\TechTestTests\TechTestTests.csproj", "{CFC8B3F1-1A94-4C5E-A87B-7321DE6E2C52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PartitionProblem", "PartitionProblem", "{D5EDD8CD-FF36-4AE9-BBE1-D0E981208246}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Partition.Problem", "Fenergo.TechTest\Partition.Problem.csproj", "{4C04F01E-2B7B-4D90-B535-57017D9C8874}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Partition.Problem", "Partition.Problem\Partition.Problem.csproj", "{4C04F01E-2B7B-4D90-B535-57017D9C8874}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
