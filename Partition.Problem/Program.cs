@@ -10,6 +10,7 @@ namespace PartitionProblem
         {
             int[][] problemSets = {
                 new int[]{ 10, 20, 90, 100, 200 },
+                new int[]{ 5, 200, 90, 10, 5, 10, 100 },
                 new int[]{ 2, 3, 4, 5, 6, 2, 12, 23, 1, 2, 4, 5, 5, 1, 6, 7, 10, 5, 2, 1 },
                 new int[]{ 2, 3, 4, 5, 6, 2 },
                 new int[]{ 6, 4, 3, 2, 1, 6 }
