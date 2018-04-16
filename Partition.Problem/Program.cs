@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Fenergo.TechTest
+namespace PartitionProblem
 {
     class Program
     {
@@ -11,51 +11,33 @@ namespace Fenergo.TechTest
         {
             int[][] problemSets = {
                 new int[]{ 10, 20, 90, 100, 200 },
+                new int[]{ 5, 200, 90, 10, 5, 10, 100 },
                 new int[]{ 2, 3, 4, 5, 6, 2, 12, 23, 1, 2, 4, 5, 5, 1, 6, 7, 10, 5, 2, 1 },
-                new int[]{ 2, 3, 4, 5, 6, 2 }
+                new int[]{ 2, 3, 4, 5, 6, 2 },
+                new int[]{ 6, 4, 3, 2, 1, 6 }
             };
-
-
-            for (var i = 0; i < problemSets.Length; i++)
-            {
-                var set = problemSets[i].OrderBy(number => number).ToList();
-
-                WatchTime(() => PrintSet("Solution with sorted set", set), () =>
-                {
-                    for (var j = 0; j < 1000; j++)
-                    {
-                        PartitionSolver.SolveProblem(set);
-                    }
-                });
-            }
 
             for (var i = 0; i < problemSets.Length; i++)
             {
                 WatchTime(() => PrintSet("Solution", problemSets[i]), () =>
                 {
-                    for(var j = 0; j < 1000; j++)
-                    {
-                        PartitionSolver.SolveProblem(problemSets[i]);
-                    }
+                    var solution = new PartitionSolver(problemSets[i]);
+                    solution.SolveProblem();
                 });
             }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"Solution B");
 
             for (var i = 0; i < problemSets.Length; i++)
             {
-                var set = problemSets[i].OrderBy(number => number).ToList();
-
-                WatchTime(() => PrintSet("Solution with sorted set", set), () =>
+                WatchTime(() => PrintSet("Solution", problemSets[i]), () =>
                 {
-                    for (var j = 0; j < 1000; j++)
-                    {
-                        PartitionSolver.SolveProblem(set);
-                    }
+                    var solutionB = new SolutionB(problemSets[i]);
+                    solutionB.SolveProblem();
                 });
             }
-
-
-            //WatchTime("Solution B", () => SolutionB.Solve(problemSet));
-
 
             Console.ReadKey();
         }
@@ -78,7 +60,7 @@ namespace Fenergo.TechTest
         {
             var strSet = string.Join(", ", set);
 
-            Console.WriteLine($"{setName} - {{{strSet}}}");
+            Console.WriteLine($"{setName} - [{strSet}]");
         }
 
     }
